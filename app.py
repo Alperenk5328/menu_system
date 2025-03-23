@@ -13,8 +13,6 @@ db.init_app(app)
 def admin_login_page():
     return render_template('admin_login_page.html')  # İlk giriş sayfası
 
-
-# Admin login işlemi
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
@@ -24,16 +22,15 @@ def admin_login():
         # Kullanıcı adı ve şifre kontrolü
         if username == 'mcstone' and password == 'thekiller':
             flash('Başarıyla giriş yapıldı!', 'success')
-            return redirect(url_for('admin_home'))  # Giriş başarılı, admin ana sayfasına yönlendirme
+            return redirect(url_for('admin_home'))  # Giriş sonrası yönlendirme
         else:
-            flash('Kullanıcı adı veya şifre yanlış!', 'danger')  # Hatalı giriş
-    return render_template('admin_login_page.html')
+            flash('Kullanıcı adı veya şifre yanlış!', 'danger')  
+    return render_template('admin_login_page.html')  # Başarısız login durumunda
 
 # Admin ana sayfası
 @app.route('/admin/home')
 def admin_home():
-    return render_template('admin_home.html')  # Admin paneli sayfası
-
+    return render_template('admin_home.html')  # Admin paneli ana sayfası
 
 @app.route('/manage_menu')
 def manage_menu():
@@ -86,8 +83,3 @@ def cancel_order(order_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
